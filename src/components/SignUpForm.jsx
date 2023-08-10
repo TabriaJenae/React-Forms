@@ -5,6 +5,8 @@ const SignUpForm = ({setToken}) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+
+
     async function handleSubmit(event) {
         event.preventDefault();
     
@@ -32,13 +34,20 @@ const SignUpForm = ({setToken}) => {
        <>
        <h2>Sign Up!</h2> 
        {error && <p>{error}</p>}
-        <form method='POST' onSubmit={handleSubmit}>
+        <form method='POST' 
+        onSubmit={handleSubmit} 
+        onClick={() => {
+            setUsername(username)
+        }}>
       <label >
         Username:{""} 
         <input 
         value = {username}
+     
          onChange={(e)=> 
-        setUsername(e.target.value)} />
+        setUsername(e.target.value)} 
+        />
+        
       </label>
       <label >
         Password:{""}
@@ -51,6 +60,7 @@ const SignUpForm = ({setToken}) => {
       <button type='submit'>Submit</button>
 
     </form>
+    <p >Welcome! {username}</p> 
     </>
  );
 }
