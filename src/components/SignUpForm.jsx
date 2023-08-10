@@ -5,10 +5,28 @@ const SignUpForm = ({setToken}) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    const [usernameError, setUsernameError] = useState(null);
+    const [passwordError, setPasswordError] = useState(null);
 
 
     async function handleSubmit(event) {
         event.preventDefault();
+      
+        if (username.length < 6) {
+            setUsernameError("Username must be at least 6 characters in length");
+            return;
+          } else {
+            setUsernameError(null);
+          }
+          
+          // form validation: password
+          if (password.length < 8) {
+            setPasswordError("Password must be at least 8 characters in length");
+            return;
+          } else {
+            setPasswordError(null);
+          }
+          
     
         try {
             const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup",
@@ -30,9 +48,10 @@ const SignUpForm = ({setToken}) => {
         }
       }
 
+
     return ( 
        <>
-       <h2>Sign Up!</h2> 
+       <h2 style={{fontSize:"25px", fontFamily:"Avenir"}}>Sign Up!</h2> 
        {error && <p>{error}</p>}
         <form method='POST' 
         onSubmit={handleSubmit} 
@@ -42,25 +61,34 @@ const SignUpForm = ({setToken}) => {
       <label >
         Username:{""} 
         <input 
+        placeholder='Username'
         value = {username}
-     
          onChange={(e)=> 
-        setUsername(e.target.value)} 
-        />
-        
+        setUsername(e.target.value)} />
       </label>
+          
+        {/* form validation: username */}
+        {usernameError && <p style={{ color: "red"}}>{usernameError}</p>}  
+      
       <label >
         Password:{""}
          <input 
+         placeholder='Password'
          type='password'
-         value={password} 
+         value={password}
          onChange={(e)=> 
          setPassword(e.target.value)}/>
       </label>
-      <button type='submit'>Submit</button>
+    
+         {/* form validation: password */}
+         {passwordError && <p style={{ color: "red"}}>{passwordError}</p>}
 
+      <button type='submit' style=
+      {{width: "80px", height: "37px", padding: "10px", 
+      fontSize:"15px"}}
+      >Submit</button>
     </form>
-    <p >Welcome! {username}</p> 
+    <p style={{fontSize:"50px", fontFamily:"Avenir"}}>Welcome! {username}</p> 
     </>
  );
 }

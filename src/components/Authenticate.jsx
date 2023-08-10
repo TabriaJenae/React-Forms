@@ -22,13 +22,13 @@ function Authenticate ({token}) {
         } 
     }
     return ( 
-    <>
-    <h2>Authenticate!</h2> 
-    {successMessage && <p>{successMessage}</p>}
-    {error && <p>{error}</p>}
-    <button onClick={handleClick}>
-        Authenticate Token!</button>
-    </>
+        <>
+        <h2 style={{fontSize:"30px", fontFamily:"Avenir"}}>Authenticate!</h2> 
+        {successMessage && <p>{successMessage}</p>}
+        {error && <p>{error}</p>}
+        <button onClick={handleClick}>
+            Authenticate Token!</button>
+            </>
     );
   
 }
